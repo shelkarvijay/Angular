@@ -1,0 +1,56 @@
+<div mat-dialog-content class="popup-content">
+
+
+    <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title><h1 mat-dialog-title>Fill Below Form</h1></mat-card-title>
+        </mat-card-header>
+        <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+        <mat-card-content>
+            <div class="popupForm container">
+                <form [formGroup]="empFormGroup">
+                    <mat-form-field class="full-width">
+                  <label>
+                    First Name</label> :
+                  <input appInputStyle type="text" class="firstNameField" formControlName="formCtrlEmployeeName" (keyup.enter)="onPress($event)" matInput required>
+                  <mat-hint>Include area code</mat-hint>
+                  <mat-error class="left-space" *ngIf="f.formCtrlEmployeeName.errors?.required">Required field cannot be left blank</mat-error>
+                  <mat-error class="left-space" *ngIf="f.formCtrlEmployeeName.errors?.pattern">Enter min 3 to max 8 character</mat-error>
+                  </mat-form-field>
+                </form>
+              </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div mat-dialog-actions>
+                <button mat-raised-button class="btn btn-default" style="margin-right:10px;" (click)="submit()">
+                  Assign
+                </button>
+                <button mat-raised-button class="btn btn-danger" [mat-dialog-close]="true">
+                  Cancel
+                </button>
+              </div>
+        </mat-card-actions>
+      </mat-card>
+
+  <!-- <h1 mat-dialog-title>Fill Below Form</h1> -->
+  <!-- <div class="popupForm container">
+    <form [formGroup]="empFormGroup">
+      <label>
+        First Name</label> :
+      <input appInputStyle type="text" class="firstNameField" formControlName="formCtrlEmployeeName" (keyup.enter)="onPress($event)">
+      <mat-error class="left-space" *ngIf="f.formCtrlEmployeeName.errors?.required">Required field cannot be left blank</mat-error>
+      <mat-error class="left-space" *ngIf="f.formCtrlEmployeeName.errors?.pattern">Enter min 3 to max 8 character</mat-error>
+      <div mat-dialog-actions>
+        <button mat-raised-button class="btn btn-default" style="margin-right:10px;" (click)="submit()">
+          Assign
+        </button>
+        <button mat-raised-button class="btn btn-danger" [mat-dialog-close]="true">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div> -->
+
+  
+</div>
