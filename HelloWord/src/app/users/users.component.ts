@@ -21,15 +21,15 @@ export class UsersComponent implements OnInit {
       this.users = data;
     });
   }
-  // openDialog(): void {
-  //   console.log("Dialog call");
-  //  this.dialog.open(PopupFormComponent, {
-  //     width: '400px',
-  //     height: 'auto'
+  openDialog(): void {
+    console.log("Dialog call");
+   this.dialog.open(PopupFormComponent, {
+      width: '400px',
+      height: ''
 
-  //   });
+    });
 
 
-  // }
+  }
 
 }

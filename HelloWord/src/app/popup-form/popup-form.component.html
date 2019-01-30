@@ -13,7 +13,7 @@
                     <mat-form-field class="full-width">
                   <label>
                     First Name</label> :
-                  <input appInputStyle type="text" class="firstNameField" formControlName="formCtrlEmployeeName" (keyup.enter)="onPress($event)" matInput required>
+                  <input appInputStyle type="text" class="form-control firstNameField" formControlName="formCtrlEmployeeName" (keyup.enter)="onPress($event)" required>
                   <mat-hint>Include area code</mat-hint>
                   <mat-error class="left-space" *ngIf="f.formCtrlEmployeeName.errors?.required">Required field cannot be left blank</mat-error>
                   <mat-error class="left-space" *ngIf="f.formCtrlEmployeeName.errors?.pattern">Enter min 3 to max 8 character</mat-error>
