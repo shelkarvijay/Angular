@@ -1,0 +1,21 @@
+<p>
+  data-list works!
+</p>
+<form [formGroup]="registerForm">
+  <div class="example-container">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field>
+          <input matInput placeholder="First Name" formControlName="firstName">
+        </mat-form-field>
+
+      </div>
+      <div class="col-6">
+        <mat-form-field>
+          <input matInput placeholder="Last Name" formControlName="lastName">
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button (click)="submit()">Submit</button>
+  </div>
+</form>
