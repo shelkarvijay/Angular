@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ComponentsRoutingModule } from './components-routing.module';
 import { LoginComponent } from './login/login.component';
-import { MatCardModule, MatInputModule, MatButtonModule } from '@angular/material';
+import { MatCardModule, MatInputModule, MatButtonModule, MatTableModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -16,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MatCardModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule
   ]
 })
 export class ComponentsModule { }
