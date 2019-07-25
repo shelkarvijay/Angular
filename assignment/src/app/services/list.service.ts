@@ -16,7 +16,7 @@ export class ListService {
     return this.http.get("http://jsonplaceholder.typicode.com/users");
   }
 
-  getUserName(message: string) {
-    this.username.next(message)
+  getUserName(name: string) {
+    this.username.next(name);
   }
 }

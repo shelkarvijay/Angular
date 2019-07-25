@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ListComponent } from './list/list.component';
-import { MatTableModule, MatIconModule, MatTooltipModule, MatCardModule, MatPaginatorModule, MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
 import { EditUserComponent } from './list/edit-user/edit-user.component';
 import { MaterialModule } from 'src/app/shared/material/material.module';
 

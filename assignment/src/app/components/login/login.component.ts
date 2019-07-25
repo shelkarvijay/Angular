@@ -1,12 +1,14 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ListService } from 'src/app/services/list.service';
+import { LoginModel } from './model/login.model';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [LoginModel]
 })
 export class LoginComponent implements OnInit {
 
@@ -18,17 +20,19 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private listService: ListService
+    private listService: ListService,
+    private loginModel: LoginModel
   ) { }
 
   ngOnInit() {
     this.loginForm = this.createForm();
+    this.loginForm.value.username.untouched;
   }
 
   createForm() {
     return this.formBuilder.group({
-      username: ['', [Validators.required, Validators.pattern(this.usernamePattern)]],
-      password: ['', [Validators.pattern(this.passwordPattern)]]
+      username: [this.loginModel.username, [Validators.pattern(this.usernamePattern)]],
+      password: [this.loginModel.password, [Validators.pattern(this.passwordPattern)]]
     })
   }
 
