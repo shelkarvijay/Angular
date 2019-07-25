@@ -39,6 +39,8 @@ export class ListComponent implements OnInit, OnDestroy {
   getUsername: string;
   subscriptions: Subscription[] = [];
   showSpinner: boolean;
+  noData: boolean;
+  getDataApiError: boolean;
   constructor(
     private listService: ListService,
     public dialog: MatDialog,
@@ -47,33 +49,55 @@ export class ListComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.subscriptions.push(
-      this.listService.getList().subscribe(res => {
+      // get all data from api
+      this.listService.getList().subscribe(customerData => {
         this.showSpinner = true;
-        setTimeout(() => {
-          this.data = Object.assign(res);
-          this.dataSource = new MatTableDataSource(this.data);
-          this.dataSource.paginator = this.paginator;
+        if (customerData) {
+          setTimeout(() => {
+            this.data = Object.assign(customerData);
+            if (this.data.length) {
+              this.dataSource = new MatTableDataSource(this.data);
+              this.dataSource.paginator = this.paginator;
+              this.showSpinner = false;
+              this.noData = false;
+              this.getDataApiError = false;
+            } else {
+              this.showSpinner = false;
+              this.noData = true;
+            }
+          }, 600);
+        } else {
           this.showSpinner = false;
-        }, 600);
+          this.noData = true;
+        }
+      },
+      error => {
+        this.getDataApiError = true;
+        console.log(error);
       })
     );
 
+    // get username from LoginComponent and set here
     this.subscriptions.push(
-      this.listService.currentUserName.subscribe(message => this.getUsername = message)
+      this.listService.currentUserName.subscribe(username => {
+        return this.getUsername = username ? username : '';
+      })
     );
   }
 
-  editUser(element){
+  editUser(element) {
+    // concat address as street and city
     element['address'] = element.address.street + element.address.city;
+    
     const dialogRef = this.dialog.open(EditUserComponent, {
       autoFocus: true,
       disableClose: true,
       width: '50%',
-      panelClass: 'delete-dialog',
+      panelClass: 'edit-dialog',
       data: element
     });
-    dialogRef.afterClosed().subscribe(res => {
-      if (!res) {
+    dialogRef.afterClosed().subscribe(closeDialog => {
+      if (!closeDialog) {
         return;
       }
     });

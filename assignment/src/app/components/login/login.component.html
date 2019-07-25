@@ -6,7 +6,9 @@
         <form [formGroup]="loginForm">
             <div class="username-field">
                 <mat-form-field>
-                    <input type="text" matInput #username placeholder="Username" formControlName="username" maxlength="15" required>
+                    <input type="text" matInput #username placeholder="Username" formControlName="username" maxlength="15"
+                        required aria-invalid="false">
+                    <mat-icon matSuffix class="material-icons">info</mat-icon>
                 </mat-form-field>
                 <mat-error *ngIf="loginForm.get('username').hasError('required')">Required field can not be blank</mat-error>
                 <mat-error *ngIf="loginForm.get('username').hasError('pattern')">Please enter a valid Username.</mat-error>

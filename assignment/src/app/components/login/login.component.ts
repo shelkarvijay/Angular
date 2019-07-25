@@ -30,14 +30,16 @@ export class LoginComponent implements OnInit {
 
   createForm() {
     return this.formBuilder.group({
-      username: [this.loginModel.username, [Validators.pattern(this.usernamePattern)]],
-      password: [this.loginModel.password, [Validators.pattern(this.passwordPattern)]]
+      username: ['', [Validators.required, Validators.pattern(this.usernamePattern)]],
+      password: ['', [Validators.pattern(this.passwordPattern)]]
     })
   }
 
-  login(formValues) {
+  login(formValues: any) {
     const username = formValues.username;
     this.listService.getUserName(username);
+
+    // navigate to dashboard after login
     this.router.navigateByUrl('/dashboard');
   }
 

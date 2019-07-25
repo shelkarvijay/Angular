@@ -56,7 +56,12 @@
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
-
+        <div class="text-center mt-3 mt-3" *ngIf="noData">
+            No Records Found.
+        </div>
+        <div class="text-center mt-3 mt-3" *ngIf="getDataApiError">
+            Get Data Api Error.
+        </div>
         <div class="mat-table__bottom">
             <mat-spinner [diameter]="30" *ngIf="showSpinner" class="loader"></mat-spinner>
             <mat-paginator [pageSize]="5" [pageIndex]="0" [length]="data.length" [showFirstLastButtons]="true"></mat-paginator>

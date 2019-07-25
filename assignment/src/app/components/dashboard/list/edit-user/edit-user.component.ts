@@ -11,6 +11,7 @@ import { UserModel } from '../../models/user.model';
 export class EditUserComponent implements OnInit {
   editUserForm: FormGroup;
   userModel: UserModel;
+  
   constructor(
     public dialogRef: MatDialogRef<EditUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -18,7 +19,7 @@ export class EditUserComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userModel = this.data;
+    this.userModel = this.data ? this.data : this.data = [];
     this.editUserForm = this.createForm();
   }
 
