@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.createForm();
-    this.loginForm.value.username.untouched;
   }
 
   createForm() {
