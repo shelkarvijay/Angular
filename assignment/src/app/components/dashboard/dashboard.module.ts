@@ -3,19 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ListComponent } from './list/list.component';
-import { MatTableModule, MatIconModule, MatTooltipModule, MatCardModule, MatPaginatorModule } from '@angular/material';
+import { MatTableModule, MatIconModule, MatTooltipModule, MatCardModule, MatPaginatorModule, MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
+import { EditUserComponent } from './list/edit-user/edit-user.component';
+import { MaterialModule } from 'src/app/shared/material/material.module';
 
 
 @NgModule({
-  declarations: [ListComponent],
+  declarations: [ListComponent, EditUserComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MatTableModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatCardModule,
-    MatPaginatorModule
+    MaterialModule
+  ],
+  entryComponents: [
+    EditUserComponent
   ]
 })
 export class DashboardModule { }

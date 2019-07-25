@@ -23,26 +23,19 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.createForm();
-    // this.listService.currentMessage.subscribe(message => this.message = message)
   }
 
   createForm() {
     return this.formBuilder.group({
-      username: ['', [Validators.pattern(this.usernamePattern)]],
+      username: ['', [Validators.required, Validators.pattern(this.usernamePattern)]],
       password: ['', [Validators.pattern(this.passwordPattern)]]
     })
   }
 
   login(formValues) {
     const username = formValues.username;
-    const password = formValues.password;
-    if (username === '' && password === '') {
-      console.log('username or password does not match');
-    } else {
-      this.listService.getUserName(username);
-      console.log('getUserName:', username);
-      this.router.navigateByUrl('/dashboard');
-    }
+    this.listService.getUserName(username);
+    this.router.navigateByUrl('/dashboard');
   }
 
 }

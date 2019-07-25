@@ -1,4 +1,6 @@
-<h2>Welcome {{getUsername}}</h2>
+<div class="title">
+    <h4>Welcome <span class="username">{{getUsername}}!</span></h4>
+</div>
 <mat-card>
     <mat-card-content class="example-card">
         <mat-table [dataSource]="dataSource" class="mat-elevation-z8 mat-table-section dashboard-table desktop-view-table">
@@ -46,18 +48,8 @@
             <ng-container matColumnDef="actions">
                 <mat-header-cell class="header cell-1" *matHeaderCellDef> Action </mat-header-cell>
                 <mat-cell class="cell cell-2" *matCellDef="let element">
-                    <button mat-icon-button matTooltip="Edit" (click)="editUser(element)" class="edit-button scrollToTop"
-                        style="flex-shrink:unset;">
-                        <mat-icon color="primary">edit</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Delete" class="delete-button" (click)="deleteUser(element)"
-                        style="flex-shrink:unset;">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                    <button style="flex-shrink:unset;" mat-icon-button matTooltip="Login Logs" class="delete-button"
-                        (click)="logsUser(element)">
-                        <mat-icon>speaker_notes</mat-icon>
-                    </button>
+                    <mat-icon matTooltip="Edit" class="edit-button" color="primary" (click)="editUser(element)">edit</mat-icon>
+                    <mat-icon matTooltip="Delete" class="delete-button">delete</mat-icon>
                 </mat-cell>
             </ng-container>
 
@@ -65,13 +57,9 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
 
-        <!-- <div class="mat-table__message text-center mt-3 mb-3" *ngIf="!dataSource.hasItems && !(dataSource.loading$ | async)">
-        No Records Found
-    </div> -->
         <div class="mat-table__bottom">
-            <!-- <mat-spinner [diameter]="30" *ngIf="dataSource.loading$ | async" class="loader"></mat-spinner> -->
-            <mat-paginator [pageSize]="5" [pageIndex]="0" [length]="data.length"
-                [showFirstLastButtons]="true"></mat-paginator>
+            <mat-spinner [diameter]="30" *ngIf="showSpinner" class="loader"></mat-spinner>
+            <mat-paginator [pageSize]="5" [pageIndex]="0" [length]="data.length" [showFirstLastButtons]="true"></mat-paginator>
         </div>
     </mat-card-content>
 </mat-card>

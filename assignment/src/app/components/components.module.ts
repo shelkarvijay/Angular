@@ -5,6 +5,7 @@ import { ComponentsRoutingModule } from './components-routing.module';
 import { LoginComponent } from './login/login.component';
 import { MatCardModule, MatInputModule, MatButtonModule, MatTableModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../shared/material/material.module';
 
 
 @NgModule({
@@ -12,12 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     ComponentsRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatCardModule,
-    MatInputModule,
-    MatButtonModule,
-    MatTableModule
+    MaterialModule
   ]
 })
 export class ComponentsModule { }

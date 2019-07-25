@@ -5,10 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { PagesTopComponent } from './shared/components/pages-top/pages-top.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PagesTopComponent
   ],
   imports: [
     BrowserModule,

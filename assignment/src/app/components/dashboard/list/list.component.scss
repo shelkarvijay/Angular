@@ -9,6 +9,33 @@
   .dashboard-table {
     border: 1px solid #ebedf2;
     width: 90%;
+    margin: 0 auto 20px auto;
+  }
+  .mat-header-cell {
+    color: black;
+    font-size: 15px;
+  }
+
+  .mat-table__bottom {
+    width: 90%;
     margin: 0 auto;
   }
-  
+
+  .loader {
+    margin: 0 auto;
+  }
+
+  .edit-button, .delete-button{
+    cursor: pointer;
+  }
+  .mat-cell, .mat-footer-cell {
+    color: rgba(53, 51, 51, 0.87);
+}
+
+.title{
+  margin: 15px auto 0px;
+  width: 88%;
+}
+.username{
+  font-weight: bold;
+}
