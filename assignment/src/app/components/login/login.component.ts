@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   usernamePattern: any = /^[ A-Za-z0-9_@!@#$&*.]*$/;
   passwordPattern: any = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{2,}$/;
-  username: string = 'fdsf';
+  username: string;
   message: string;
   constructor(
     private formBuilder: FormBuilder,
@@ -26,13 +26,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.createForm();
+    console.log(this.loginForm);
   }
 
   createForm() {
     return this.formBuilder.group({
       username: ['', [Validators.required, Validators.pattern(this.usernamePattern)]],
       password: ['', [Validators.pattern(this.passwordPattern)]]
-    })
+    });
   }
 
   login(formValues: any) {

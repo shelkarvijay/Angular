@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import Swal from 'sweetalert2';
 
 export interface PeriodicElement {
   id: number;
@@ -22,7 +23,7 @@ export interface PeriodicElement {
 })
 export class ListComponent implements OnInit, OnDestroy {
 
-  displayedColumns: string[] = [
+  displayedColumnsArray: string[] = [
     'id',
     'name',
     'phone',
@@ -41,42 +42,16 @@ export class ListComponent implements OnInit, OnDestroy {
   showSpinner: boolean;
   noData: boolean;
   getDataApiError: boolean;
+  indexOfElement: any;
+  customerDataLength: number;
+  prevData: any[];
   constructor(
     private listService: ListService,
     public dialog: MatDialog,
   ) { }
 
   ngOnInit() {
-
-    this.subscriptions.push(
-      // get all data from api
-      this.listService.getList().subscribe(customerData => {
-        this.showSpinner = true;
-        if (customerData) {
-          setTimeout(() => {
-            this.data = Object.assign(customerData);
-            if (this.data.length) {
-              this.dataSource = new MatTableDataSource(this.data);
-              this.dataSource.paginator = this.paginator;
-              this.showSpinner = false;
-              this.noData = false;
-              this.getDataApiError = false;
-            } else {
-              this.showSpinner = false;
-              this.noData = true;
-            }
-          }, 600);
-        } else {
-          this.showSpinner = false;
-          this.noData = true;
-        }
-      },
-      error => {
-        this.getDataApiError = true;
-        console.log(error);
-      })
-    );
-
+    this.getData();
     // get username from LoginComponent and set here
     this.subscriptions.push(
       this.listService.currentUserName.subscribe(username => {
@@ -85,20 +60,91 @@ export class ListComponent implements OnInit, OnDestroy {
     );
   }
 
-  editUser(element) {
+  getData() {
+    this.subscriptions.push(
+      // get all data from api
+      this.listService.getList().subscribe(customerData => {
+        this.showSpinner = true;
+        if (customerData) {
+          setTimeout(() => {
+            this.filteredData(customerData);
+          }, 600);
+        } else {
+          this.showSpinner = false;
+          this.noData = true;
+        }
+      },
+        error => {
+          this.getDataApiError = true;
+          console.log(error);
+        })
+    );
+  }
+
+  filteredData(customerData, isUpdate?: any) {
+    let prevData = this.data;
+    if (isUpdate) {
+      const updatedId = customerData.updatedId;
+      for (let element in prevData) {
+        if (prevData[element].id === updatedId) {
+          prevData[element] = customerData;
+          prevData[element]['address'] = { city: customerData.address };
+        }
+      }
+    } else {
+      this.data = Object.assign(customerData);
+      prevData = this.data;
+
+    }
+    if (prevData.length) {
+      console.log(prevData)
+      // prevData['address'] = ;
+      this.dataSource = new MatTableDataSource(prevData);
+      this.customerDataLength = this.dataSource.filteredData.length;
+      this.dataSource.paginator = this.paginator;
+      this.showSpinner = false;
+      this.noData = false;
+      this.getDataApiError = false;
+    } else {
+      this.showSpinner = false;
+      this.noData = true;
+    }
+  }
+
+  editUser(element, index) {
+    const data = element;
     // concat address as street and city
-    element['address'] = element.address.street + element.address.city;
-    
+    data['address'] = data['address']['street'] + data['address']['city'];
     const dialogRef = this.dialog.open(EditUserComponent, {
       autoFocus: true,
       disableClose: true,
       width: '50%',
       panelClass: 'edit-dialog',
-      data: element
+      data: data
     });
-    dialogRef.afterClosed().subscribe(closeDialog => {
-      if (!closeDialog) {
+    dialogRef.afterClosed().subscribe(dialogValue => {
+      // console.log(dialogValue);
+      if (dialogValue === 'closeDialog') {
+        this.filteredData(this.data);
+      } else {
+        this.indexOfElement = index;
+        this.filteredData(dialogValue, true);
+      }
+      if (!dialogValue) {
         return;
+      }
+    });
+  }
+
+  deleteUser(element, index) {
+    Swal.fire({ title: 'Do you really want to delete?', showCancelButton: true, showCloseButton: true }).then(result => {
+      if (result.value) {
+        let deleteData = element.id;
+        const index = this.data.indexOf(element);
+        this.data.splice(index, 1);
+        this.filteredData(this.data, false);
+      } else {
+
       }
     });
   }

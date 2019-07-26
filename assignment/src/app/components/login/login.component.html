@@ -7,10 +7,10 @@
             <div class="username-field">
                 <mat-form-field>
                     <input type="text" matInput #username placeholder="Username" formControlName="username" maxlength="15"
-                        required aria-invalid="false">
+                        required>
                     <mat-icon matSuffix class="material-icons">info</mat-icon>
                 </mat-form-field>
-                <mat-error *ngIf="loginForm.get('username').hasError('required')">Required field can not be blank</mat-error>
+                <mat-error *ngIf="loginForm.get('username').touched && loginForm.get('username').hasError('required')">Required field can not be blank</mat-error>
                 <mat-error *ngIf="loginForm.get('username').hasError('pattern')">Please enter a valid Username.</mat-error>
             </div>
             <div class="password-field">
@@ -18,7 +18,7 @@
                     <input type="password" matInput placeholder="Password" formControlName="password" minlength="5"
                         maxlength="15" required>
                 </mat-form-field>
-                <mat-error *ngIf="loginForm.get('password').hasError('required')">Required field can not be blank</mat-error>
+                <mat-error *ngIf="loginForm.get('password').touched && loginForm.get('password').hasError('required')">Required field can not be blank</mat-error>
                 <mat-error *ngIf="loginForm.get('password').hasError('pattern')">Password contains at least one digit,
                     one small letter and one capital letter.</mat-error>
                 <mat-error *ngIf="loginForm.get('password').hasError('minlength')">Password minimum 5 character length.</mat-error>

@@ -11,7 +11,8 @@ import { UserModel } from '../../models/user.model';
 export class EditUserComponent implements OnInit {
   editUserForm: FormGroup;
   userModel: UserModel;
-  
+  updatedId: any;
+
   constructor(
     public dialogRef: MatDialogRef<EditUserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -21,6 +22,7 @@ export class EditUserComponent implements OnInit {
   ngOnInit() {
     this.userModel = this.data ? this.data : this.data = [];
     this.editUserForm = this.createForm();
+    this.updatedId = this.editUserForm.get('id').value;
   }
 
   createForm() {
@@ -34,7 +36,13 @@ export class EditUserComponent implements OnInit {
     })
   }
 
-  closeDialog() {
-    this.dialogRef.close();
+  formSubmit(formValues) {
+    formValues.id = parseInt(formValues.id);
+    this.closeDialog(formValues, this.updatedId);
+  }
+
+  closeDialog(value, updatedId?: any) {
+    if (updatedId) { value['updatedId'] = updatedId; }
+    this.dialogRef.close(value);
   }
 }
