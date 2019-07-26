@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ListComponent } from './list.component';
+import { MaterialModule } from 'src/app/shared/material/material.module';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('ListComponent', () => {
   let component: ListComponent;
@@ -8,9 +11,14 @@ describe('ListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListComponent ]
+      imports: [MaterialModule],
+      declarations: [ListComponent],
+      providers: [
+        EditUserComponent,
+        { provide: MatDialogRef, useValue: {} }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

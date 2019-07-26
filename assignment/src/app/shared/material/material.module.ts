@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatCardModule, MatInputModule, MatButtonModule, MatTableModule, MatIconModule, MatTooltipModule, MatPaginatorModule, MatProgressSpinnerModule, MatDialogModule } from '@angular/material';
+import { MatCardModule, MatInputModule, MatButtonModule, MatTableModule, MatIconModule, MatTooltipModule, MatPaginatorModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -14,6 +15,7 @@ const MaterialModules = [
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatDialogModule,
+  MatDialogRef,
   FormsModule,
   ReactiveFormsModule,
 ];
