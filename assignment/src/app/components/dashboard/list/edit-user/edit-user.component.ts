@@ -32,11 +32,11 @@ export class EditUserComponent implements OnInit {
   createForm() {
     return this.formBuilder.group({
       id: [this.userModel.id, [Validators.required, Validators.pattern(/^[0-9]{1,}$/)]],
-      name: [this.userModel.name],
-      phone: [this.userModel.phone, [Validators.required]],
-      username: [this.userModel.username],
-      email: [this.userModel.email, [Validators.required]],
-      address: [{ city: this.userModel.address.city, street: this.userModel.address.street }],
+      name: [this.userModel.name, [Validators.required, Validators.pattern(/^[ A-Za-z]*$/)]],
+      phone: [this.userModel.phone, [Validators.required, Validators.pattern('[6-9]\\d{9}')]],
+      username: [this.userModel.username, [Validators.required, Validators.pattern(/^[ A-Za-z0-9_@!@#$&*.]*$/)]],
+      email: [this.userModel.email, [Validators.required, Validators.pattern(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\\.]+)\.([a-zA-Z]{2,5})$/)]],
+      address: [{ city: this.userModel.address.city, street: this.userModel.address.street }, [Validators.required]],
     });
   }
 
