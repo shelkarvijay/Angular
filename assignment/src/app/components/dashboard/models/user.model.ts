@@ -4,7 +4,7 @@ export class UserModel {
     phone?: number;
     username?: string;
     email?: string;
-    address?: string;
+    address?: {city: string, street: string};
 
     clear() {
         this.id = null;
@@ -12,6 +12,6 @@ export class UserModel {
         this.phone = null;
         this.username = '';
         this.email = '';
-        this.address = '';
+        this.address = {city: '', street: ''};
     }
 }

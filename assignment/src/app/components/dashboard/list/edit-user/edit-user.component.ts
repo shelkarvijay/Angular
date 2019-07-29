@@ -22,6 +22,10 @@ export class EditUserComponent implements OnInit {
   ngOnInit() {
     this.userModel = this.data ? this.data : this.data = [];
     this.editUserForm = this.createForm();
+    const addressControl = this.editUserForm.get('address');
+    const city = this.data.address.city ? this.data.address.city : '';
+    const street = this.data.address.street ? this.data.address.street : '';
+    addressControl.setValue(city + '' + street);
     this.updatedId = this.editUserForm.get('id').value;
   }
 
@@ -32,11 +36,11 @@ export class EditUserComponent implements OnInit {
       phone: [this.userModel.phone, [Validators.required]],
       username: [this.userModel.username],
       email: [this.userModel.email, [Validators.required]],
-      address: [this.userModel.address],
-    })
+      address: [{ city: this.userModel.address.city, street: this.userModel.address.street }],
+    });
   }
 
-  formSubmit(formValues) {
+  update(formValues) {
     formValues.id = parseInt(formValues.id);
     this.closeDialog(formValues, this.updatedId);
   }

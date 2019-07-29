@@ -91,6 +91,7 @@ export class ListComponent implements OnInit, OnDestroy {
           prevData[element]['address'] = { city: customerData.address };
         }
       }
+      console.log(prevData);
     } else {
       this.data = Object.assign(customerData);
       prevData = this.data;
@@ -114,7 +115,7 @@ export class ListComponent implements OnInit, OnDestroy {
   editUser(element, index) {
     const data = element;
     // concat address as street and city
-    data['address'] = data['address']['street'] + data['address']['city'];
+    data['address'] = { city: data['address']['street'], street: data['address']['city']};
     const dialogRef = this.dialog.open(EditUserComponent, {
       autoFocus: true,
       disableClose: true,

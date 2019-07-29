@@ -16,6 +16,7 @@ describe('ListComponent', () => {
       providers: [
         EditUserComponent,
         { provide: MatDialogRef, useValue: {} }
+        
       ]
     })
       .compileComponents();
