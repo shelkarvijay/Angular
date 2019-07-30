@@ -91,15 +91,12 @@ export class ListComponent implements OnInit, OnDestroy {
           prevData[element]['address'] = { city: customerData.address };
         }
       }
-      console.log(prevData);
     } else {
       this.data = Object.assign(customerData);
       prevData = this.data;
 
     }
     if (prevData.length) {
-      console.log(prevData)
-      // prevData['address'] = ;
       this.dataSource = new MatTableDataSource(prevData);
       this.customerDataLength = this.dataSource.filteredData.length;
       this.dataSource.paginator = this.paginator;

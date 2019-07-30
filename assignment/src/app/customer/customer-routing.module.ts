@@ -10,10 +10,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
     path: 'dashboard',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
   }
@@ -23,4 +19,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ComponentsRoutingModule { }
+
+export class CustomerRoutingModule { }
